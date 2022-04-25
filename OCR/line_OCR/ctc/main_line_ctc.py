@@ -61,7 +61,7 @@ def train_and_test(rank, params):
 
 
 if __name__ == "__main__":
-    dataset_name = "IAM"  # ["RIMES", "IAM", "READ_2016"]
+    dataset_name = "NCELL"  # ["RIMES", "IAM", "READ_2016"]
 
     params = {
         "dataset_params": {
@@ -150,7 +150,7 @@ if __name__ == "__main__":
         },
 
         "training_params": {
-            "output_folder": "fcn_iam_line",  # folder names for logs and weigths
+            "output_folder": "fcn_ncell_line",  # folder names for logs and weigths
             "max_nb_epochs": 5000,  # max number of epochs for the training
             "max_training_time":  3600*(24+23),  # max training time limit (in seconds)
             "load_epoch": "best",  # ["best", "last"], to load weights from best epoch or last trained epoch
