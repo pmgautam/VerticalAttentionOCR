@@ -36,7 +36,7 @@
 from torch.utils.data import Dataset, DataLoader
 from torch.utils.data.distributed import DistributedSampler
 from torchvision.transforms.functional import adjust_brightness, adjust_contrast
-from torchvision.transforms import RandomPerspective
+from torchvision.transforms import RandomPerspective, InterpolationMode
 from basic.transforms import SignFlipping, DPIAdjusting, Dilation, Erosion, ElasticDistortion, RandomTransform
 from basic.utils import LM_str_to_ind
 import os
@@ -319,7 +319,7 @@ class GenericDataset(Dataset):
                 img = DPIAdjusting(factor)(img)
             if "perspective" in aug.keys() and np.random.rand() < aug["perspective"]["proba"]:
                 scale = np.random.uniform(aug["perspective"]["min_factor"], aug["perspective"]["max_factor"])
-                img = RandomPerspective(distortion_scale=scale, p=1, interpolation=Image.BILINEAR, fill=255)(img)
+                img = RandomPerspective(distortion_scale=scale, p=1, interpolation=InterpolationMode.BILINEAR, fill=255)(img)
             elif "elastic_distortion" in aug.keys() and np.random.rand() < aug["elastic_distortion"]["proba"]:
                 magnitude = np.random.randint(1, aug["elastic_distortion"]["max_magnitude"] + 1)
                 kernel = np.random.randint(1, aug["elastic_distortion"]["max_kernel"] + 1)
